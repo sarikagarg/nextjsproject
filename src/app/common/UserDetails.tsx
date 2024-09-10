@@ -4,7 +4,7 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { Box, Flex, Text, Input, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure, ModalCloseButton } from "@chakra-ui/react";
+import { Box, Text, Button, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton } from "@chakra-ui/react";
 import { isAuthenticated, getUserName, getJobTitle } from '@/app/lib/util';
 import UserSetting from "./UserSetting";
 
@@ -29,7 +29,7 @@ export default function UserDetails() {
     setIsEdit(false);
   };
 
-  const onSave = (isValid: Boolean) => {
+  const onSave = (isValid: boolean) => {
     if (isValid) {
       onClose();
     }

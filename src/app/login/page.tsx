@@ -10,7 +10,7 @@ export default function Login() {
   const [showDetails, setShowDetails] = useState<boolean>(false);
   const router = useRouter();
 
-  const onSave = (isValid: Boolean) => {
+  const onSave = (isValid: boolean) => {
     if (isValid) {
       localStorage.setItem('isAuthenticated', 'true');
       router.push('/welcome');
@@ -22,7 +22,7 @@ export default function Login() {
       setShowDetails(true);
       router.push('/welcome');
     }
-  }, []);
+  });
 
   return !showDetails ?
     <UserSetting buttonTitle="Submit" onButtonClick={onSave} name='' title='' /> : <div>Loading...</div>;

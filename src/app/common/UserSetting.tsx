@@ -23,11 +23,11 @@ export default function UserSetting({
   const [jobTitle, setJobTitleState] = useState<string>(title || "");
   const [error, setError] = useState<{ userName?: string, jobTitle?: string }>({});
 
-  const onUserNameChange = ({ target: { value } }: any) => {
+  const onUserNameChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
     setUserNameState(value);
   }
 
-  const onJobTitleChange = ({ target: { value } }: any) => {
+  const onJobTitleChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
     setJobTitleState(value);
   }
 
