@@ -41,9 +41,6 @@ interface CharactersVars {
   page: number;
 }
 
-
-
-
 const InformationPageWrapper = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -138,8 +135,8 @@ const InformationPageWrapper = () => {
   )
 }
 
-
 export default function InformationPage() {
- 
-  return <Suspense><InformationPageWrapper /></Suspense>
+  return <Suspense>
+    <InformationPageWrapper />
+  </Suspense>
 }

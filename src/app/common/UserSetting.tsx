@@ -22,13 +22,16 @@ export default function UserSetting({
   const [userName, setUserNameState] = useState<string>(name || "");
   const [jobTitle, setJobTitleState] = useState<string>(title || "");
   const [error, setError] = useState<{ userName?: string, jobTitle?: string }>({});
+  const [touched, setTouched] = useState<boolean>(false);
 
   const onUserNameChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
     setUserNameState(value);
+    setTouched(true);
   }
 
   const onJobTitleChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
     setJobTitleState(value);
+    setTouched(true);
   }
 
   const onClick: React.MouseEventHandler<HTMLButtonElement> = () => {
@@ -36,6 +39,8 @@ export default function UserSetting({
       setUserName(userName);
       setJobTitle(jobTitle);
       onButtonClick(true);
+    } else {
+      setTouched(true); // Ensure that validation errors are shown if form is submitted
     }
   }
 
@@ -48,13 +53,15 @@ export default function UserSetting({
   }
 
   useEffect(() => {
-    validate();
+    if (touched) {
+      validate();
+    }
   }, [userName, jobTitle]);
 
   return (
     <Flex align="center" justify="center" height="auto">
       <Box p={6} boxShadow="lg">
-        <FormControl isInvalid={!!error.userName}>
+        <FormControl isInvalid={touched && !!error.userName}>
           <Text mb={2}>Please enter your name and job title to proceed.</Text>
           <Input
             placeholder="Username"
@@ -62,17 +69,17 @@ export default function UserSetting({
             onChange={onUserNameChange}
             mb={2}
           />
-          {error.userName && <FormErrorMessage mb={5}>{error.userName}</FormErrorMessage>}
+          {touched && error.userName && <FormErrorMessage mb={5}>{error.userName}</FormErrorMessage>}
         </FormControl>
 
-        <FormControl isInvalid={!!error.jobTitle} mt={4}>
+        <FormControl isInvalid={touched && !!error.jobTitle} mt={4}>
           <Input
             placeholder="Job Title"
             value={jobTitle}
             onChange={onJobTitleChange}
             mb={2}
           />
-          {error.jobTitle && <FormErrorMessage mb={5}>{error.jobTitle}</FormErrorMessage>}
+          {touched && error.jobTitle && <FormErrorMessage mb={5}>{error.jobTitle}</FormErrorMessage>}
         </FormControl>
 
         <Button colorScheme="teal" onClick={onClick}>
