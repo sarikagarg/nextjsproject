@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
+import { Suspense } from 'react'
 import { Image, Box, Flex, SimpleGrid, Spinner, Text, Button } from '@chakra-ui/react';
 import { useQuery } from '@apollo/client';
 
@@ -40,7 +41,10 @@ interface CharactersVars {
   page: number;
 }
 
-export default function InformationPage() {
+
+
+
+const InformationPageWrapper = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialPage = parseInt(searchParams.get('page') || '1', 10);
@@ -132,4 +136,10 @@ export default function InformationPage() {
       )}
     </Box>
   )
+}
+
+
+export default function InformationPage() {
+ 
+  return <Suspense><InformationPageWrapper /></Suspense>
 }

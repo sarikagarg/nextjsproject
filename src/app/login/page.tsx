@@ -22,7 +22,7 @@ export default function Login() {
       setShowDetails(true);
       router.push('/welcome');
     }
-  });
+  }, [router]);
 
   return !showDetails ?
     <UserSetting buttonTitle="Submit" onButtonClick={onSave} name='' title='' /> : <div>Loading...</div>;
